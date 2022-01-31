@@ -18,15 +18,15 @@ test('se a página contém um heading h2 com o texto About Pokédex', () => {
 
 test('se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
   renderWithRouter(<About />);
-  const paragraphOne = screen.getByText(/This application simulates a Pokédex, a digital encyclopedia containing all Pokémons/i);
+  const paragraphOne = screen.getByText(/This application simulates/i);
   expect(paragraphOne).toBeInTheDocument();
-  const paragraphTwo = screen.getByText(/One can filter Pokémons by type, and see more details for each one of them/i);
+  const paragraphTwo = screen.getByText(/One can filter Pokémons by type/i);
   expect(paragraphTwo).toBeInTheDocument();
 });
 
 test('Teste se a página contém a imagem de uma Pokédex', () => {
   const srcImg = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
   renderWithRouter(<About />);
-  const aboutImg = screen.getByAltText(/Pokédex/i);
-  expect(aboutImg).toHaveAttribute('src', srcImg);
+  const img = screen.getByAltText(/Pokédex/i);
+  expect(img).toHaveAttribute('src', srcImg);
 });
