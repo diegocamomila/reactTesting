@@ -21,24 +21,24 @@ test('teste redirecionamento para a página inicial / , ao clicar no link Home',
     const { history } = renderWithRouter(<App />);
     const linkHome = screen.getByRole('link', { name: /home/i });
     userEvent.click(linkHome);
-    const { pathName } = history.location;
-    expect(pathName).toBe('/');
+    const { pathname } = history.location;
+    expect(pathname).toBe('/');
   });
 
-test('teste redirecionamento para a página  /abalt , ao clicar no link Abalt',
+test('teste redirecionamento para a página  /about , ao clicar no link Abalt',
   () => {
     const { history } = renderWithRouter(<App />);
-    const linkAbalt = screen.getByRole('link', { name: /abalt/i });
+    const linkAbalt = screen.getByRole('link', { name: /about/i });
     userEvent.click(linkAbalt);
-    const { pathName } = history.location;
-    expect(pathName).toBe('/abalt');
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
   });
 
 test('teste redirecionamento para página /favorites, no link Pokemons Favoritados',
   () => {
     const { history } = renderWithRouter(<App />);
-    const linkFavorites = screen.getByRole('link', { name: /favorites pokémons/i });
+    const linkFavorites = screen.getByRole('link', { name: /favorite pokémons/i });
     userEvent.click(linkFavorites);
-    const { pathName } = history.location;
-    expect(pathName).toBe('/favorites');
+    const { pathname } = history.location;
+    expect(pathname).toBe('/favorites');
   });
