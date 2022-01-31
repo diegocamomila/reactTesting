@@ -37,7 +37,7 @@ test('teste redirecionamento para a página  /abalt , ao clicar no link Abalt',
 test('teste redirecionamento para página /favorites, no link Pokemons Favoritados',
   () => {
     const { history } = renderWithRouter(<App />);
-    const linkFavorites = screen.getByRole('link', { name: /favorites/i });
+    const linkFavorites = screen.getByRole('link', { name: /favorites pokémons/i });
     userEvent.click(linkFavorites);
     const { pathName } = history.location;
     expect(pathName).toBe('/favorites');
