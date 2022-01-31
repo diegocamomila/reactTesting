@@ -31,6 +31,16 @@ test('Teste se card do Pokémon indicado contem um link de navegação', () => {
 test('Teste se o link de navegação Pokemon, redireciona para a pg de detalhes', () => {
   renderWithRouter(<App />);
   userEvent.click(screen.getByRole('link', { name: /more details/i }));
-  const detailsText = screen.getByText(/game locations/i);
-  expect(detailsText).toBeInTheDocument();
+  const detailsPage = screen.getByText(/game locations/i);
+  expect(detailsPage).toBeInTheDocument();
+});
+
+test('Teste a URL exibida no navegador', () => {
+  const { history } = renderWithRouter(<App />);
+  userEvent.click(screen.getByRole('link', { name: /more details/i }));
+  const { location: { pathname } } = history;
+  expect(pathname).toBe('/pokemons/25');
+  userEvent.click(screen.getByLabelText(/Pokémon favoritado/i));
+  const favoritIcon = screen.getByAltText(/pikachu is marked as favorite/i);
+  expect(favoritIcon).toHaveAttribute('src', '/star-icon.svg');
 });
