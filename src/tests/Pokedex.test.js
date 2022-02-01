@@ -14,33 +14,21 @@ test('teste se página contém um heading h2 com o texto Encountered pokémons',
   expect(titlePokemon).toBeInTheDocument();
 });
 
-test('Teste se é exibido o próximo Pokémon quando o botão Próximo pokémon é clicado',
-  () => {
-    renderWithRouter(<App />);
-    const nextButton = screen.getByTestId(/next-pokemon/i);
-    expect(nextButton).toBeInTheDocument();
+test('Verifica se é exibido o próximo Pokémon depois do clique', () => {
+  renderWithRouter(<App />);
+  // Verificando se existe um botão com o texto Próximo pokémon:
+  const nextButton = screen.getByRole('button', { name: /próximo pokémon/i });
+  expect(nextButton).toBeInTheDocument();
 
-    const pokemons = [
-      'Pikachu',
-      'Charmander',
-      'Cartepie',
-      'Ekans',
-      'Alakazam',
-      'Mew',
-      'Rapidash',
-      'Snorlax',
-      'Dragonair',
-    ];
+  // Verificando se os próximos Pokémons são mostrados, um de cada vez
+  const pikachuOne = screen.getByAltText(/pikachu sprite/i);
+  expect(pikachuOne).toBeInTheDocument(); // Primeiro pokémon na tela é o Pikachu
+  userEvent.click(nextButton); // Depois do clique no botão deve aparecer o próximo pokémon
 
-    pokemons.forEach((pokemon) => {
-      const pokemonName = screen.getByTestId('pokemon-name', { name: pokemon });
-      expect(pokemonName).toBeInTheDocument();
-      userEvent.click(nextButton);
-    });
-
-    const nextPokemonName = screen.getByTestId('pokemon-name', { name: /pikachu/i });
-    expect(nextPokemonName).toBeInTheDocument();
-  });
+  const charmanderTwo = screen.getByAltText(/charmander sprite/i);
+  expect(charmanderTwo).toBeInTheDocument(); // O segundo pokémon na tela deve ser o Charmander
+  userEvent.click(nextButton);
+});
 
 test('Teste se é mostrado apenas um Pokémon por vez',
   () => {
